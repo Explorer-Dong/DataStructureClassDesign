@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SortWidget</class>
+ <widget class="QWidget" name="SortWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>530</width>
+    <height>501</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>SortWidget</string>
+  </property>
+  <widget class="QLabel" name="titleLabel">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>20</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Sort Experiment</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>160</y>
+     <width>491</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="typeHLayout">
+    <item>
+     <widget class="QLabel" name="shellLabel">
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
+      <property name="text">
+       <string>shell</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="heapLabel">
+      <property name="text">
+       <string>heap</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="quickLabel">
+      <property name="text">
+       <string>quick</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="mergeLabel">
+      <property name="text">
+       <string>merge</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>19</x>
+     <y>250</y>
+     <width>491</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="resultHLayout">
+    <item>
+     <widget class="QLineEdit" name="shellLineEdit"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="heapLineEdit"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="quickLineEdit"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="mergeLineEdit"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_3">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>370</y>
+     <width>231</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="buttonHLayout">
+    <item>
+     <widget class="QPushButton" name="commitPushButton">
+      <property name="text">
+       <string>commit</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="cancelPushButton">
+      <property name="text">
+       <string>cancel</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_4">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>60</y>
+     <width>261</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="inputHLayout">
+    <item>
+     <widget class="QLabel" name="countLabel">
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="countLineEdit"/>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
