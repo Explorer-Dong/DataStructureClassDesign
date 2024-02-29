@@ -5,27 +5,32 @@
 #include <iostream>
 #include <vector>
 #include <functional>
-
-using namespace std;
+#include <fstream>
 
 class sortAlgorithm {
 private:
-	int Size;
-	string path;
-	vector<int> arr;
+	int Size, Range;
+	std::string Path;
+	std::vector<int> arr;
 
-	// Generate num random numbers in [0, range)
-	vector<int> Generate(int num, int range) {
+	// Generate num random numbers in [-range, range)
+	void Generate(int num, int range) {
+		std::ofstream fout;
+		fout.open(Path + "\\generate_array.txt", std::ios::out);
+
 		srand(time(nullptr));
-		vector<int> res;
 		for (int i = 0; i < num; i++) {
-			res.push_back(rand() % range);
+			int data = rand() % (range << 1) - range;
+			arr.push_back(data);
+			fout << data << "\n";
 		}
-		return res;
+		fout.close();
+
+		return;
 	}
 
 	// ShellSort
-	int ShellSort(vector<int> a) {
+	int ShellSort(std::vector<int> a) {
 		int cnt = 0;
 
 		auto Sort = [&]() {
@@ -43,21 +48,23 @@ private:
 
 		Sort();
 
+		WriteToFile(Path + "\\shell_array.txt", a);
+
 		return cnt;
 	}
 
 	// QuickSort
-	int QuickSort(vector<int> a) {
+	int QuickSort(std::vector<int> a) {
 		int cnt = 0;
 
-		function<void(int, int)> Sort = [&](int l, int r) {
+		std::function<void(int, int)> Sort = [&](int l, int r) {
 			if (l == r) return;
 
 			int i = l - 1, j = r + 1, x = a[(i + j) >> 1];
 			while (i < j) {
 				while (a[++i] < x);
 				while (a[--j] > x);
-				if (i < j) swap(a[i], a[j]), cnt++;
+				if (i < j) std::swap(a[i], a[j]), cnt++;
 			}
 			Sort(l, j);
 			Sort(j + 1, r);
@@ -65,11 +72,13 @@ private:
 
 		Sort(0, a.size() - 1);
 
+		WriteToFile(Path + "\\quick_array.txt", a);
+
 		return cnt;
 	}
 
 	// HeapSort(largest top)
-	int HeapSort(vector<int> a) {
+	int HeapSort(std::vector<int> a) {
 		int cnt = 0;
 
 		auto pushdown = [&](int top, int lim) {
@@ -79,7 +88,7 @@ private:
 				cnt++;
 				if (a[top] <= a[j]) {
 					cnt++;
-					swap(a[top], a[j]);
+					std::swap(a[top], a[j]);
 					top = j;
 					j = 2 * top + 1;
 				} else {
@@ -96,18 +105,20 @@ private:
 
 		// modify heap
 		for (int i = 0; i < n - 1; i++) {
-			swap(a[0], a[n - i - 1]);
+			std::swap(a[0], a[n - i - 1]);
 			pushdown(0, n - i - 2);
 		}
+
+		WriteToFile(Path + "\\heap_array.txt", a);
 
 		return cnt;
 	}
 
 	// MergeSort - recursion
-	int MergeSort(vector<int> a) {
+	int MergeSort(std::vector<int> a) {
 		int cnt = 0;
 
-		function<void(int, int)> mergeSort = [&](int l, int r) {
+		std::function<void(int, int)> mergeSort = [&](int l, int r) {
 			if (l >= r) return;
 
 			// divide
@@ -131,15 +142,28 @@ private:
 
 		mergeSort(0, a.size() - 1);
 
+		WriteToFile(Path + "\\merge_array.txt", a);
+
 		return cnt;
 	}
 
+	void WriteToFile(std::string path, std::vector<int>& a) {
+		std::ofstream fout;
+		fout.open(path);
+		for (auto& x: a) {
+			fout << x << "\n";
+		}
+		fout.close();
+	}
 
 public:
-	sortAlgorithm(int _Size, int range = 1000, string _path = "D:/desktop/Algorithm.txt") {
-		Size = _Size;
-		path = _path;
-		arr = Generate(Size, range);
+	sortAlgorithm(int _Size, int _Range, std::string _Path) : Size(_Size), Range(_Range), Path(_Path) {
+
+		if (Size < 0 || Size >= 1e8) {
+			std::cerr << "Invalid Size" << std::endl;
+		}
+
+		Generate(Size, Range);
 	}
 
 	int ShellSort() { return ShellSort(arr); }
