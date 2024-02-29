@@ -12,9 +12,9 @@ void Test2() {
 
 int main(int argc, char* argv[]) {
 	QApplication app(argc, argv);
-//	SortWidget w;
-	HashWidget h;
-//	w.show();
-	h.show();
+	SortWidget w;
+//	HashWidget h;
+	w.show();
+//	h.show();
 	return app.exec();
 }

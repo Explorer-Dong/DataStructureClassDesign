@@ -20,18 +20,15 @@ Q_OBJECT
 
 private:
 	Ui::SortWidget* ui;
+	QString path;
 
 private slots:
+	void pushFolderButton();
 	void pushCommitButton();
 	void pushCancelButton();
 
 public:
 	explicit SortWidget(QWidget* parent = nullptr);
-
-	// 算法
-	int getNumber();
-	std::vector<int> funAlgo();
-	void outputResult();
 
 	~SortWidget() override;
 };

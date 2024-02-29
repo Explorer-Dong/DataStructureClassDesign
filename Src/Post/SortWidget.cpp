@@ -7,11 +7,13 @@
 #include "../Headers/SortWidget.h"
 #include "../Forms/ui_SortWidget.h"
 #include "../Algorithm/sortAlgorithm.cpp"
+#include <QFileDialog>
 
 
 SortWidget::SortWidget(QWidget* parent) : QWidget(parent), ui(new Ui::SortWidget) {
 	ui->setupUi(this);
 	this->setWindowTitle("排序比较器");
+	connect(ui->folderPushButton, &QPushButton::clicked, this, &SortWidget::pushFolderButton);
 	connect(ui->commitPushButton, &QPushButton::clicked, this, &SortWidget::pushCommitButton);
 	connect(ui->cancelPushButton, &QPushButton::clicked, this, &SortWidget::pushCancelButton);
 }
@@ -20,49 +22,34 @@ SortWidget::~SortWidget() {
 	delete ui;
 }
 
-int SortWidget::getNumber() {
-	QString dataNumber = ui->countLineEdit->text();
+void SortWidget::pushFolderButton() {
+	path = QFileDialog::getExistingDirectory(
+			this,
+			tr("choose folder"),
+			QDir::currentPath(),
+			QFileDialog::ShowDirsOnly
+	);
 
 	// 异常处理
-
-	return dataNumber.toInt();
-}
-
-vector<int> SortWidget::funAlgo() {
-	int dataNumber = getNumber();
-	sortAlgorithm obj(dataNumber);
-
-	vector<int> result(4);
-
-	int shellCount = obj.ShellSort();
-	int heapCount = obj.HeapSort();
-	int quickCount = obj.QuickSort();
-	int mergeCount = obj.MergeSort();
-
-	result[0] = shellCount;
-	result[1] = heapCount;
-	result[2] = quickCount;
-	result[3] = mergeCount;
-
-	return result;
-}
-
-void SortWidget::outputResult() {
-	vector<int> result = funAlgo();
-
-	int shellCount = result[0];
-	int heapCount = result[1];
-	int quickCount = result[2];
-	int mergeCount = result[3];
-
-	ui->shellLineEdit->setText(QString::number(shellCount));
-	ui->heapLineEdit->setText(QString::number(heapCount));
-	ui->quickLineEdit->setText(QString::number(quickCount));
-	ui->mergeLineEdit->setText(QString::number(mergeCount));
+	if (path.isEmpty()) {
+		return;
+	}
+	ui->pathLabel->setText(path);
 }
 
 void SortWidget::pushCommitButton() {
-	outputResult();
+	int dataNumber = ui->countLineEdit->text().toInt();
+
+	// 异常处理
+	if (dataNumber < 0 || dataNumber >= 1e8) {
+		return;
+	}
+
+	sortAlgorithm obj(dataNumber, path.toStdString());
+	ui->shellLineEdit->setText(QString::number(obj.ShellSort()));
+	ui->heapLineEdit->setText(QString::number(obj.HeapSort()));
+	ui->quickLineEdit->setText(QString::number(obj.QuickSort()));
+	ui->mergeLineEdit->setText(QString::number(obj.MergeSort()));
 }
 
 void SortWidget::pushCancelButton() {
