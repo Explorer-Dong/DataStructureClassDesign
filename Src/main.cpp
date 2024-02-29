@@ -1,17 +1,20 @@
 #include <QApplication>
 #include "Headers/SortWidget.h"
+#include "Headers/HashWidget.h"
 #include "Test/test2.cpp"
 
-int main(int argc, char* argv[]) {
-//	QApplication app(argc, argv);
-//	SortWidget w;
-//	w.show();
-//	return app.exec();
-
+void Test2() {
 	test2 t2;
 	t2.std();
 	t2.self();
 	t2.binary();
+}
 
-	return 0;
+int main(int argc, char* argv[]) {
+	QApplication app(argc, argv);
+//	SortWidget w;
+	HashWidget h;
+//	w.show();
+	h.show();
+	return app.exec();
 }
