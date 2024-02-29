@@ -29,6 +29,9 @@ add_executable(DataStructureClassDesign
 
         Src/Post/SortWidget.cpp
 
+        Src/Test/test1.cpp
+        Src/Test/test2.cpp
+
         Src/main.cpp
 )
 
