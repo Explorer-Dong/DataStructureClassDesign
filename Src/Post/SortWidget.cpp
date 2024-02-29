@@ -45,7 +45,7 @@ void SortWidget::pushCommitButton() {
 		return;
 	}
 
-	sortAlgorithm obj(dataNumber, path.toStdString());
+	sortAlgorithm obj(dataNumber, 1000, path.toStdString());
 	ui->shellLineEdit->setText(QString::number(obj.ShellSort()));
 	ui->heapLineEdit->setText(QString::number(obj.HeapSort()));
 	ui->quickLineEdit->setText(QString::number(obj.QuickSort()));
