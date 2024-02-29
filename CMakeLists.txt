@@ -24,13 +24,16 @@ add_executable(DataStructureClassDesign
         Src/Algorithm/hashAlgorithm.cpp
 
         Src/Forms/SortWidget.ui
+        Src/Forms/HashWidget.ui
 
         Src/Headers/SortWidget.h
+        Src/Headers/HashWidget.h
 
         Src/Post/SortWidget.cpp
+        Src/Post/HashWidget.cpp
 
-        Src/Test/test1.cpp
-        Src/Test/test2.cpp
+        Src/Test/TestSort.cpp
+        Src/Test/TestHash.cpp
 
         Src/main.cpp
 )
