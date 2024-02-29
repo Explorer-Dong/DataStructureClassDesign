@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>501</height>
+    <width>388</width>
+    <height>424</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QLabel" name="titleLabel">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>20</y>
+     <x>120</x>
+     <y>30</y>
      <width>131</width>
      <height>21</height>
     </rect>
@@ -29,78 +29,11 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QWidget" name="horizontalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>160</y>
-     <width>491</width>
-     <height>80</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="typeHLayout">
-    <item>
-     <widget class="QLabel" name="shellLabel">
-      <property name="contextMenuPolicy">
-       <enum>Qt::CustomContextMenu</enum>
-      </property>
-      <property name="text">
-       <string>shell</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="heapLabel">
-      <property name="text">
-       <string>heap</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="quickLabel">
-      <property name="text">
-       <string>quick</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="mergeLabel">
-      <property name="text">
-       <string>merge</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="horizontalLayoutWidget_2">
-   <property name="geometry">
-    <rect>
-     <x>19</x>
-     <y>250</y>
-     <width>491</width>
-     <height>80</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="resultHLayout">
-    <item>
-     <widget class="QLineEdit" name="shellLineEdit"/>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="heapLineEdit"/>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="quickLineEdit"/>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="mergeLineEdit"/>
-    </item>
-   </layout>
-  </widget>
   <widget class="QWidget" name="horizontalLayoutWidget_3">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>370</y>
+     <x>80</x>
+     <y>310</y>
      <width>231</width>
      <height>80</height>
     </rect>
@@ -122,25 +55,152 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="horizontalLayoutWidget_4">
+  <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>60</y>
-     <width>261</width>
+     <x>40</x>
+     <y>70</y>
+     <width>311</width>
      <height>80</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="inputHLayout">
-    <item>
-     <widget class="QLabel" name="countLabel">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0">
+     <widget class="QPushButton" name="pushButton">
       <property name="text">
-       <string>TextLabel</string>
+       <string>folder</string>
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QLineEdit" name="countLineEdit"/>
+    <item row="0" column="0">
+     <widget class="QLabel" name="countLabel">
+      <property name="text">
+       <string>number</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="countLineEdit">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="placeholderText">
+       <string>please input data scale</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="label">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>180</y>
+     <width>251</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <widget class="QLabel" name="shellLabel">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
+      <property name="text">
+       <string>shell</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="heapLabel">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>heap</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QLabel" name="quickLabel">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>quick</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="3">
+     <widget class="QLabel" name="mergeLabel">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>merge</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLineEdit" name="shellLineEdit"/>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="heapLineEdit"/>
+    </item>
+    <item row="1" column="2">
+     <widget class="QLineEdit" name="quickLineEdit"/>
+    </item>
+    <item row="1" column="3">
+     <widget class="QLineEdit" name="mergeLineEdit"/>
     </item>
    </layout>
   </widget>

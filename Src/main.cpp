@@ -1,7 +1,7 @@
 #include <QApplication>
 #include "Headers/SortWidget.h"
 #include "Headers/HashWidget.h"
-#include "Test/test2.cpp"
+#include "Test/TestHash.cpp"
 
 void Test2() {
 	test2 t2;
