@@ -2,16 +2,22 @@
 <ui version="4.0">
  <class>SortWidget</class>
  <widget class="QWidget" name="SortWidget">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>388</width>
-    <height>424</height>
+    <width>386</width>
+    <height>359</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>SortWidget</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>true</bool>
   </property>
   <widget class="QLabel" name="titleLabel">
    <property name="geometry">
@@ -32,10 +38,10 @@
   <widget class="QWidget" name="horizontalLayoutWidget_3">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>310</y>
-     <width>231</width>
-     <height>80</height>
+     <x>110</x>
+     <y>270</y>
+     <width>158</width>
+     <height>71</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="buttonHLayout">
@@ -106,6 +112,9 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255)</string>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -116,13 +125,45 @@
   <widget class="QWidget" name="gridLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>60</x>
      <y>180</y>
      <width>251</width>
-     <height>111</height>
+     <height>71</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="1" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+     <widget class="QLabel" name="heapLabel">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>heap cnt</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+     <widget class="QLabel" name="quickLabel">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>quick cnt</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="0">
      <widget class="QLabel" name="shellLabel">
       <property name="sizePolicy">
@@ -135,39 +176,7 @@
        <enum>Qt::CustomContextMenu</enum>
       </property>
       <property name="text">
-       <string>shell</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLabel" name="heapLabel">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>heap</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QLabel" name="quickLabel">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>quick</string>
+       <string>shell cnt</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -183,7 +192,7 @@
        </sizepolicy>
       </property>
       <property name="text">
-       <string>merge</string>
+       <string>merge cnt</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -191,16 +200,56 @@
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QLineEdit" name="shellLineEdit"/>
+     <widget class="QLabel" name="shellResultLabel">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255)</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QLineEdit" name="heapLineEdit"/>
+     <widget class="QLabel" name="heapResultLabel">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255)</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
     </item>
     <item row="1" column="2">
-     <widget class="QLineEdit" name="quickLineEdit"/>
+     <widget class="QLabel" name="quickResultLabel">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255)</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
     </item>
     <item row="1" column="3">
-     <widget class="QLineEdit" name="mergeLineEdit"/>
+     <widget class="QLabel" name="mergeResultLabel">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255)</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
