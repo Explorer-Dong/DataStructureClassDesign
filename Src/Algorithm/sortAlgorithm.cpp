@@ -158,11 +158,6 @@ private:
 
 public:
 	sortAlgorithm(int _Size, int _Range, std::string _Path) : Size(_Size), Range(_Range), Path(_Path) {
-
-		if (Size < 0 || Size >= 1e8) {
-			std::cerr << "Invalid Size" << std::endl;
-		}
-
 		Generate(Size, Range);
 	}
 
