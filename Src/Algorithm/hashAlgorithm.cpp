@@ -1,5 +1,5 @@
 //
-// Created by è‘£æ–‡æ° on 2024-02-26.
+// Created by ¶­ÎÄ½Ü on 2024-02-26.
 //
 
 #include <iostream>
@@ -22,7 +22,9 @@ private:
 	};
 
 	std::string inputPath, outputPath;
+	int hashSize;
 
+	// std ¼ìÑé
 	void writeToFile(std::unordered_map<std::string, int>& keywordCount, std::string path) {
 		std::ofstream fout;
 		fout.open(path, std::ios::out);
@@ -32,30 +34,43 @@ private:
 		fout.close();
 	}
 
+	// ×Ô¶¨Òå¹şÏ£±í¼ìÑé
+	void writeToFile(std::vector<std::pair<std::string, int>>& keywordCount, std::string path) {
+		std::ofstream fout;
+		fout.open(path, std::ios::out);
+		for (auto& x: keywordCount) {
+			if (x.second > 0) {
+				fout << x.first << ' ' << x.second << "\n";
+			}
+		}
+		fout.close();
+	}
+
 public:
 	hashAlgorithm(
-			std::string _inputPath = "E:\\cplusplusProject\\DataStructureClassDesign\\_src\\test.c",
+			std::string _inputPath = "E:\\cplusplusProject\\DataStructureClassDesign\\_src\\2.c",
 			std::string _outputPath = "E:\\cplusplusProject\\DataStructureClassDesign\\_src"
 	) : inputPath(_inputPath), outputPath(_outputPath) {
+		hashSize = 3000;
 	}
 
 	void stdHash() {
-		// æ‰“å¼€æ–‡ä»¶
+		// ´ò¿ªÎÄ¼ş
 		std::ifstream fin;
 		fin.open(inputPath, std::ios::in);
 
 		std::unordered_map<std::string, int> keywordCount;
 
-		// å¼‚å¸¸å¤„ç†
+		// Òì³£´¦Àí
 		if (!fin) {
 			std::cerr << "Failed to open the file." << std::endl;
 			return;
 		}
 
-		// éå†æ–‡ä»¶
+		// ±éÀúÎÄ¼ş
 		std::string word;
 		while (fin >> word) {
-			// ç§»é™¤æ ‡ç‚¹ç¬¦å·
+			// ÒÆ³ı±êµã·ûºÅ
 			word.erase(std::remove_if(word.begin(), word.end(), ispunct), word.end());
 
 			if (std::count(keywords.begin(), keywords.end(), word)) {
@@ -65,44 +80,43 @@ public:
 
 		fin.close();
 
-		// åˆ©ç”¨å“ˆå¸Œè¡¨å†™å…¥æ–‡ä»¶
+		// ÀûÓÃ¹şÏ£±íĞ´ÈëÎÄ¼ş
 		writeToFile(keywordCount, outputPath + "\\hash_std.txt");
 
 		return;
 	}
 
 	int selfHash() {
-		// æ‰“å¼€æ–‡ä»¶
+		// ´ò¿ªÎÄ¼ş
 		std::ifstream fin;
 		fin.open(inputPath, std::ios::in);
 
-		std::unordered_map<std::string, int> keywordCount;
 		int cnt = 0;
 
-		// å¼‚å¸¸å¤„ç†
+		// Òì³£´¦Àí
 		if (!fin) {
 			std::cerr << "Failed to open the file." << std::endl;
 			return cnt;
 		}
 
-		// æ„é€ å“ˆå¸Œè¡¨
-		const int Size = 2048;
-		std::vector<std::string> myHash(Size, "");
+		// ¹¹Ôì¹şÏ£±í
+		std::vector<std::pair<std::string, int>> myHash(hashSize, {"", -1});
+
 		for (auto& word: keywords) {
 			int hashNumber = (word[0] - 'a') * 100 + (word.back() - 'a') % 41;
-			while (myHash[hashNumber] != "") {
-				hashNumber = (hashNumber + 1) % Size;
+			while (myHash[hashNumber].first != "") {
+				hashNumber = (hashNumber + 1) % hashSize;
 			}
-			myHash[hashNumber] = word;
+			myHash[hashNumber] = {word, 0};
 		}
 
-		// éå†æ–‡ä»¶
+		// ±éÀúÎÄ¼ş
 		std::string word;
 		while (fin >> word) {
-			// ç§»é™¤æ ‡ç‚¹ç¬¦å·
+			// ÒÆ³ı±êµã·ûºÅ
 			word.erase(std::remove_if(word.begin(), word.end(), ispunct), word.end());
 
-			// å¼‚å¸¸å•è¯å¤„ç† - å¦‚æœå•è¯ä¸­ä¸å…¨éƒ¨éƒ½æ˜¯å­—æ¯ï¼Œåˆ™è·³è¿‡
+			// Òì³£µ¥´Ê´¦Àí - Èç¹ûµ¥´ÊÖĞ²»È«²¿¶¼ÊÇ×ÖÄ¸£¬ÔòÌø¹ı
 			if (word == "" || !std::all_of(word.begin(), word.end(), isalpha)) {
 				cnt++;
 				continue;
@@ -110,17 +124,17 @@ public:
 
 			for (auto& c: word) c = tolower(c);
 
-			// å“ˆå¸Œæœç´¢
+			// ¹şÏ£ËÑË÷
 			int count = 0;
 			int hashNumber = (word[0] - 'a') * 100 + (word.back() - 'a') % 41;
-			while (myHash[hashNumber] != "" && myHash[hashNumber] != word) {
-				hashNumber = (hashNumber + 1) % Size;
+			while (myHash[hashNumber].first != "" && myHash[hashNumber].first != word) {
+				hashNumber = (hashNumber + 1) % hashSize;
 				count++;
 			}
 
-			if (myHash[hashNumber] == word) {
+			if (myHash[hashNumber].first == word) {
 				cnt++;
-				keywordCount[word]++;
+				myHash[hashNumber].second++;
 			}
 
 			cnt += count;
@@ -128,34 +142,34 @@ public:
 
 		fin.close();
 
-		// åˆ©ç”¨å“ˆå¸Œè¡¨å†™å…¥æ–‡ä»¶
-		writeToFile(keywordCount, outputPath + "\\hash_self.txt");
+		// ÀûÓÃ¹şÏ£±íĞ´ÈëÎÄ¼ş
+		writeToFile(myHash, outputPath + "\\hash_self.txt");
 
 		return cnt;
 	}
 
 	int binaryHash() {
-		// æ‰“å¼€æ–‡ä»¶
+		// ´ò¿ªÎÄ¼ş
 		std::ifstream fin;
 		fin.open(inputPath, std::ios::in);
 
 		std::unordered_map<std::string, int> keywordCount;
 		int cnt = 0;
 
-		// å¼‚å¸¸å¤„ç†
+		// Òì³£´¦Àí
 		if (!fin) {
 			std::cerr << "Failed to open the file." << std::endl;
 			return cnt;
 		}
 
-		// éå†æ–‡ä»¶
+		// ±éÀúÎÄ¼ş
 		std::sort(keywords.begin(), keywords.end());
 		std::string word;
 		while (fin >> word) {
-			// ç§»é™¤æ ‡ç‚¹ç¬¦å·
+			// ÒÆ³ı±êµã·ûºÅ
 			word.erase(std::remove_if(word.begin(), word.end(), ispunct), word.end());
 
-			// äºŒåˆ†æŸ¥æ‰¾
+			// ¶ş·Ö²éÕÒ
 			int l = 0, r = 31, count = 0;
 			while (l < r) {
 				int mid = (l + r) >> 1;
@@ -171,7 +185,7 @@ public:
 
 		fin.close();
 
-		// åˆ©ç”¨å“ˆå¸Œè¡¨å†™å…¥æ–‡ä»¶
+		// ÀûÓÃ¹şÏ£±íĞ´ÈëÎÄ¼ş
 		writeToFile(keywordCount, outputPath + "\\hash_binary.txt");
 
 		return cnt;
