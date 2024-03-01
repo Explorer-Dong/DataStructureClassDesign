@@ -70,7 +70,7 @@
      <height>80</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout">
+   <layout class="QGridLayout" name="inputGridLayout">
     <item row="1" column="0">
      <widget class="QPushButton" name="folderPushButton">
       <property name="text">
@@ -131,7 +131,7 @@
      <height>71</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout_2">
+   <layout class="QGridLayout" name="outputGridLayout">
     <item row="0" column="1" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
      <widget class="QLabel" name="heapLabel">
       <property name="sizePolicy">
