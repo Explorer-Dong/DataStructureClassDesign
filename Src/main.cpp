@@ -13,8 +13,8 @@ void Test2() {
 int main(int argc, char* argv[]) {
 	QApplication app(argc, argv);
 	SortWidget w;
-//	HashWidget h;
+	HashWidget h;
 	w.show();
-//	h.show();
+	h.show();
 	return app.exec();
 }

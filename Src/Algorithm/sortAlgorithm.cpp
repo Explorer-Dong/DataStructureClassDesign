@@ -16,7 +16,7 @@ private:
 	// Generate num random numbers in [-range, range)
 	void Generate(int num, int range) {
 		std::ofstream fout;
-		fout.open(Path + "\\generate_array.txt", std::ios::out);
+		fout.open(Path + "\\array_generate.txt", std::ios::out);
 
 		srand(time(nullptr));
 		for (int i = 0; i < num; i++) {
@@ -48,7 +48,7 @@ private:
 
 		Sort();
 
-		WriteToFile(Path + "\\shell_array.txt", a);
+		WriteToFile(Path + "\\array_shell.txt", a);
 
 		return cnt;
 	}
@@ -72,7 +72,7 @@ private:
 
 		Sort(0, a.size() - 1);
 
-		WriteToFile(Path + "\\quick_array.txt", a);
+		WriteToFile(Path + "\\array_quick.txt", a);
 
 		return cnt;
 	}
@@ -109,7 +109,7 @@ private:
 			pushdown(0, n - i - 2);
 		}
 
-		WriteToFile(Path + "\\heap_array.txt", a);
+		WriteToFile(Path + "\\array_heap.txt", a);
 
 		return cnt;
 	}
@@ -142,7 +142,7 @@ private:
 
 		mergeSort(0, a.size() - 1);
 
-		WriteToFile(Path + "\\merge_array.txt", a);
+		WriteToFile(Path + "\\array_merge.txt", a);
 
 		return cnt;
 	}

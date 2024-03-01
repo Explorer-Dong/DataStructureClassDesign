@@ -66,7 +66,7 @@ public:
 		fin.close();
 
 		// 利用哈希表写入文件
-		writeToFile(keywordCount, outputPath + "\\output_std.txt");
+		writeToFile(keywordCount, outputPath + "\\hash_std.txt");
 
 		return;
 	}
@@ -129,7 +129,7 @@ public:
 		fin.close();
 
 		// 利用哈希表写入文件
-		writeToFile(keywordCount, outputPath + "\\output_self.txt");
+		writeToFile(keywordCount, outputPath + "\\hash_self.txt");
 
 		return cnt;
 	}
@@ -172,7 +172,7 @@ public:
 		fin.close();
 
 		// 利用哈希表写入文件
-		writeToFile(keywordCount, outputPath + "\\output_binary.txt");
+		writeToFile(keywordCount, outputPath + "\\hash_binary.txt");
 
 		return cnt;
 	}
