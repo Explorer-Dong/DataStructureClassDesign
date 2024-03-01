@@ -15,7 +15,7 @@
 
 为了更好的了解排序算法内部的机制，我统计了每一种排序算法内部的比较次数,并结合了 Qt 的可视化框架进行编写。将四种排序作为算法内核嵌入 GUI 界面，程序结构如下：
 
-![排序程序结构图](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202402291635555.png)
+![sort 程序结构图](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202402291635555.png)
 
 ### 1.3 实验数据与测试结果分析
 
@@ -60,7 +60,7 @@
 
 ### 2.2 程序结构
 
-![哈希程序结构图](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202402291634240.png)
+![hash 程序结构图](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202402291634240.png)
 
 ### 2.3 实验数据与测试结果分析
 
