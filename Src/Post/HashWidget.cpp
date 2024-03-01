@@ -11,6 +11,7 @@
 
 HashWidget::HashWidget(QWidget* parent) : QWidget(parent), ui(new Ui::HashWidget) {
 	ui->setupUi(this);
+	this->setWindowTitle("哈希比较器");
 
 	connect(ui->inputFilePushButton, &QPushButton::clicked, this, &HashWidget::pushInputFileButton);
 	connect(ui->outputPathPushButton, &QPushButton::clicked, this, &HashWidget::pushOutputFolderButton);
@@ -53,7 +54,7 @@ void HashWidget::pushOutputFolderButton() {
 void HashWidget::pushCommitButton() {
 	// 异常处理
 	if (inputFilePath.isEmpty() || outputFolderPath.isEmpty()) {
-
+		return;
 	}
 
 	// funAlgo
