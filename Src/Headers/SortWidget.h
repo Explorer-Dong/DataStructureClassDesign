@@ -6,7 +6,6 @@
 #define DATASTRUCTURECLASSDESIGN_SORTWIDGET_H
 
 #include <QWidget>
-#include <vector>
 
 
 QT_BEGIN_NAMESPACE
