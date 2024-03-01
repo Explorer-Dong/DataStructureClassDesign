@@ -17,6 +17,88 @@
 
 ![sort 程序结构图](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202402291635555.png)
 
+#### UI
+
+```cpp
+// 窗口 继承窗口库组件
+<widget class="QWidget" name="SortWidget">
+    // 标题 标签组件
+    <widget class="QLabel" name="titleLabel"></widget>
+    // 输入 网格布局组件
+    <widget class="QGridLayout" name="inputGridLayout"></widget>
+    // 输出 网格布局组件
+    <widget class="QGridLayout" name="outputGridLayout"></widget>  
+    // 交互 水平布局组件
+    <widget class="QHBoxLayout" name="buttonHLayout"></widget>     
+</widget>
+```
+
+#### Qt Application
+
+```cpp
+#ifndef DATASTRUCTURECLASSDESIGN_SORTWIDGET_H
+#define DATASTRUCTURECLASSDESIGN_SORTWIDGET_H
+
+#include <QWidget>
+
+
+QT_BEGIN_NAMESPACE
+namespace Ui {
+    class SortWidget;
+}
+QT_END_NAMESPACE
+
+class SortWidget : public QWidget {
+Q_OBJECT
+
+private:
+    Ui::SortWidget* ui;         // 窗口对象指针
+    QString path;               // 文件存储路径
+
+private slots:
+    void pushFolderButton();    // 槽函数 - 触发事件：获取存储路径的窗口对话
+    void pushCommitButton();    // 槽函数 - 触发事件：根据输入数据量执行算法
+    void pushCancelButton();    // 槽函数 - 触发事件：清空窗口所有标签的数据
+
+public:
+    explicit SortWidget(QWidget* parent = nullptr); // 窗口构造函数
+
+    ~SortWidget() override;                         // 窗口析构函数
+};
+```
+
+#### Algorithm
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <fstream>
+
+class sortAlgorithm {
+private:
+    int Size, Range;
+    std::string Path;
+    std::vector<int> arr;
+
+    void Generate(int num, int range);                 // 数据生成
+    
+    int ShellSort(std::vector<int> a);                 // 希尔排序
+    int QuickSort(std::vector<int> a);                 // 快速排序
+    int HeapSort(std::vector<int> a);                  // 堆排序
+    int MergeSort(std::vector<int> a);                 // 归并排序
+    
+    void WriteToFile(std::string path, std::vector<int>& a);   // 写入文件
+
+public:
+    sortAlgorithm(int _Size, int _Range, std::string _Path);   // 构造函数
+
+    int ShellSort();                                   // 用户调用希尔排序
+    int QuickSort();                                   // 用户调用快速排序
+    int HeapSort();                                    // 用户调用堆排序
+    int MergeSort();                                   // 用户调用归并排序
+};
+```
+
 ### 1.3 实验数据与测试结果分析
 
 原始数据序列生成算法使用时间种子的除留余数法，在数据规模为 $10000$ 的情况下，四种算法的比较次数如下：
@@ -53,14 +135,109 @@
 ### 2.1 数据结构设计与算法思想
 
 - 第一问：
-  - 首先用关键字序列构造哈希表，哈希函数使用题中所给，容易算出哈希表的最大容量为 $25 \times 100+40$ ，我们设置为 $2048$ ，哈希表数据结构为：`int: <string, int>` 的键值对形式，可以使用动态数组容器 `std::vector<std::pair>` 进行存储。其中键设为 `int` 可以使得对于一个 `int` 类型的哈希值进行 $O(1)$ 的存储与查找，获得 `<word, cnt>`，即 `<std::string, int>`
+  - 首先用关键字序列构造哈希表，哈希函数使用题中所给，容易算出哈希表的最大容量为 $25 \times 100+40$ ，我们设置为 $3000$ ，哈希表数据结构为：`int: <string, int>` 的键值对形式，可以使用动态数组容器 `std::vector<std::pair>` 进行存储。其中键设为 `int` 可以使得对于一个 `int` 类型的哈希值进行 $O(1)$ 的存储与查找，获得 `<word, cnt>`，即 `<std::string, int>`
 
   - 然后对于文件中的每一个单词采用哈希搜索。利用哈希函数计算出每一个单词的哈希值，然后通过线性探测法进行搜索比对。关键在于如何解析出一个完整的单词，对于流读入的字符串（不包含空格、换行符、制表符等空白符），我们删除其中的符号后将剩余部分进行合并，之后进行异常处理，排除空串后进行哈希查找。查找次数包含成功和失败的比较次数
 - 第二问：将关键字存储于顺序表中，排序后，利用二分查找技术进行搜索统计。查找次数包含成功和失败的比较次数
 
 ### 2.2 程序结构
 
-![hash 程序结构图](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202402291634240.png)
+![hash 程序结构图](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202403011631780.png)
+
+#### UI
+
+```cpp
+// 窗口 继承窗口库组件
+<widget class="QWidget" name="SortWidget">                         
+    // 标题 标签组件
+    <widget class="QLabel" name="titleLabel"></widget>             
+    // 输入 网格布局组件
+    <widget class="QGridLayout" name="inputGridLayout"></widget>   
+    // 输出 网格布局组件
+    <widget class="QGridLayout" name="outputGridLayout"></widget>
+    // 交互 水平布局组件
+    <widget class="QHBoxLayout" name="buttonHLayout"></widget>     
+</widget>
+```
+
+#### Qt Application
+
+```cpp
+#ifndef DATASTRUCTURECLASSDESIGN_HASHWIDGET_H
+#define DATASTRUCTURECLASSDESIGN_HASHWIDGET_H
+
+#include <QWidget>
+
+
+QT_BEGIN_NAMESPACE
+namespace Ui {
+    class HashWidget;
+}
+QT_END_NAMESPACE
+
+class HashWidget : public QWidget {
+Q_OBJECT
+
+private:
+    Ui::HashWidget* ui;                       // 窗口对象指针
+    QString inputFilePath, outputFolderPath;  // 输入输出路径
+
+private slots:
+    void pushInputFileButton();     // 槽函数 - 触发事件：获取输入文件路径的窗口对话
+    void pushOutputFolderButton();  // 槽函数 - 触发事件：获取存储文件路径的窗口对话
+    void pushCommitButton();        // 槽函数 - 触发事件：根据输入的文件开始执行算法
+    void pushCancelButton();        // 槽函数 - 触发事件：清除当前窗口所有标签的内容
+
+public:
+    explicit HashWidget(QWidget* parent = nullptr); // 窗口构造函数
+
+    ~HashWidget() override;                         // 窗口析构函数
+
+};
+
+#endif //DATASTRUCTURECLASSDESIGN_HASHWIDGET_H
+```
+
+#### Algorithm
+
+```cpp
+#include <iostream>
+#include <unordered_map>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+
+
+class hashAlgorithm {
+private:
+    std::vector<std::string> keywords = {
+            "auto", "break", "case", "char", "const",
+            "continue", "default", "do", "double", "else",
+            "enum", "extern", "float", "for", "goto",
+            "if", "int", "long", "register", "return",
+            "short", "signed", "sizeof", "static", "struct",
+            "switch", "typedef", "union", "unsigned", "void",
+            "volatile", "while"
+    };
+
+    std::string inputPath, outputPath;
+    int hashSize;
+
+    // std 检验
+    void writeToFile(std::unordered_map<std::string, int>& keywordCount, std::string path);
+
+    // 自定义哈希表检验
+    void writeToFile(std::vector<std::pair<std::string, int>>& keywordCount, std::string path);
+
+public:
+    // 构造函数
+    hashAlgorithm(std::string _inputPath, std::string _outputPath);   
+
+    void stdHash();                 // 标准哈希 - 用于测试检验
+    int selfHash();                 // 自定义哈希
+    int binaryHash();               // 二分哈希
+};
+```
 
 ### 2.3 实验数据与测试结果分析
 
@@ -95,3 +272,9 @@
 **版本管理**。通过 Git 版本管理与 Github 的云端同步功能，也更能体会到开发留痕与 bug 检测的优势。
 
 当然美中不足的也有很多，比如单人全栈开发并不利于锻炼团队协作的能力，同时对于程序的架构设计也没有经过深度考虑，仅仅有界面，数据正常交互就戛然而止。希望在未来的算法与开发路上可以走的更远、更坚定。
+
+## 仓库地址
+
+github: <https://github.com/Explorer-Dong/DataStructureClassDesign>
+
+gitee: <https://gitee.com/explorer-dong/DataStructureClassDesign>
