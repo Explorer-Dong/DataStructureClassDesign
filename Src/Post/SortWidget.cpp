@@ -38,24 +38,34 @@ void SortWidget::pushFolderButton() {
 }
 
 void SortWidget::pushCommitButton() {
-	int dataNumber = ui->countLineEdit->text().toInt();
+	QString dataNumber = ui->countLineEdit->text();
 
 	// 异常处理
-	if (dataNumber < 0 || dataNumber >= 1e8) {
+	if (dataNumber.isEmpty()) {
+		return;
+	}
+	bool ok;
+	dataNumber.toInt(&ok);
+	if (!ok) { return; }
+
+	if (dataNumber.toInt() > 1e8 || dataNumber.toInt() < 0) {
 		return;
 	}
 
-	sortAlgorithm obj(dataNumber, 1000, path.toStdString());
-	ui->shellLineEdit->setText(QString::number(obj.ShellSort()));
-	ui->heapLineEdit->setText(QString::number(obj.HeapSort()));
-	ui->quickLineEdit->setText(QString::number(obj.QuickSort()));
-	ui->mergeLineEdit->setText(QString::number(obj.MergeSort()));
+	int scale = dataNumber.toInt();
+
+
+	sortAlgorithm obj(scale, 1000, path.toStdString());
+	ui->shellResultLabel->setText(QString::number(obj.ShellSort()));
+	ui->heapResultLabel->setText(QString::number(obj.HeapSort()));
+	ui->quickResultLabel->setText(QString::number(obj.QuickSort()));
+	ui->mergeResultLabel->setText(QString::number(obj.MergeSort()));
 }
 
 void SortWidget::pushCancelButton() {
 	ui->countLineEdit->clear();
-	ui->shellLineEdit->clear();
-	ui->heapLineEdit->clear();
-	ui->quickLineEdit->clear();
-	ui->mergeLineEdit->clear();
+	ui->shellResultLabel->clear();
+	ui->heapResultLabel->clear();
+	ui->quickResultLabel->clear();
+	ui->mergeResultLabel->clear();
 }
