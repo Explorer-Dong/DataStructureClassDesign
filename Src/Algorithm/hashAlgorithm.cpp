@@ -48,8 +48,8 @@ private:
 
 public:
 	hashAlgorithm(
-			std::string _inputPath = "E:\\cplusplusProject\\DataStructureClassDesign\\_src\\2.c",
-			std::string _outputPath = "E:\\cplusplusProject\\DataStructureClassDesign\\_src"
+			std::string _inputPath = "../Files/2.c",
+			std::string _outputPath = "../Files"
 	) : inputPath(_inputPath), outputPath(_outputPath) {
 		hashSize = 3000;
 	}
