@@ -1,8 +1,8 @@
 ## 效果演示
 
-![sort 窗口程序](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202403021745287.gif)
+<a href="https://cdn.dwj601.cn/images/202403021745287.gif" target="_blank" >排序的比较次数</a>
 
-![hash 窗口程序](https://dwj-oss.oss-cn-nanjing.aliyuncs.com/images/202403021745763.gif)
+<a href="https://cdn.dwj601.cn/images/202403021745763.gif" target="_blank" >哈希的查找次数</a>
 
 > [!note]
 >
